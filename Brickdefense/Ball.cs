@@ -16,6 +16,8 @@ namespace Brickdefense
         Vector2 position;
         Rectangle bounds;
         bool collided;
+        float motionX = 0;
+        float motionY = 0;
 
         const float ballStartSpeed = 8f;
         float ballSpeed;
@@ -39,14 +41,25 @@ namespace Brickdefense
             bounds = new Rectangle(0, 0, texture.Width, texture.Height);
             this.texture = texture;
             this.screenBounds = screenBounds;
+            
         }
 
-        //controleert op botsingen en zorgt dat de bal steeds sneller gaat
+        public void setMotion(int motionX, int motionY)
+        {
+            this.motionX = motionX;
+            this.motionY = motionY;
+
+            motion = new Vector2(motionX, motionY);
+            motion.Normalize();
+        }
+
+        //controleert op botsingen 
         public void Update()
         {
+            
             collided = false;
             position += motion * ballSpeed;
-            ballSpeed += 0.001f;
+          //  ballSpeed += 0.001f;
 
             CheckWallCollision();
         }
@@ -69,47 +82,33 @@ namespace Brickdefense
                 position.Y = 0;
                 motion.Y *= -1;
             }
-        }
-
-        //zet de bal in z'n startpositie die elke keer veschillend is
-        public void SetInStartPosition(Rectangle paddleLocation)
-        {
-            Random rand = new Random();
-
-            motion = new Vector2(rand.Next(2, 6), -rand.Next(2, 6));
-            motion.Normalize();
-
-            ballSpeed = ballStartSpeed;
-
-            position.Y = paddleLocation.Y - texture.Height;
-            position.X = paddleLocation.X + (paddleLocation.Width - texture.Width) / 2;
-        }
-
-        //controle of de bal de onderkant van het scherm raakt
-        public bool OffBottom()
-        {
-            if (position.Y > screenBounds.Height)
+            if (position.Y + texture.Height > screenBounds.Height)
             {
-                return true;
-            }
-            return false;
-        }
-
-        //controle of de bal en de balk elkaar raken als dat zo is gaat de bal in tegengestelde richting verder
-        public void PaddleCollision(Rectangle paddleLocation)
-        {
-            Rectangle ballLocation = new Rectangle(
-                (int)position.X,
-                (int)position.Y,
-                texture.Width,
-                texture.Height);
-
-            if (paddleLocation.Intersects(ballLocation))
-            {
-                position.Y = paddleLocation.Y - texture.Height;
+                position.Y = screenBounds.Height - texture.Height;
                 motion.Y *= -1;
             }
         }
+
+        //zet de bal in z'n startpositie die elke keer veschillend is
+        public void SetInStartPosition()
+        {
+             Random rand = new Random();
+
+            // motion = new Vector2(rand.Next(2, 6), -rand.Next(2, 6));
+            motion = new Vector2(motionX, motionY);
+              motion.Normalize();
+
+             ballSpeed = ballStartSpeed;
+
+            //position.X = (screenBounds.Width - texture.Width) / 2;
+            //position.Y = screenBounds.Height - texture.Height - 20;
+            position.X = 200;
+            position.Y = 200;
+        }
+
+      
+
+       
 
         //zorgt ervoor dat de bal maar een keer van richting veranderd bij een aanraking van 2 stenen tegelijk
         public void Deflection(Block brick)
@@ -127,6 +126,8 @@ namespace Brickdefense
         {
             spriteBatch.Draw(texture, position, Color.White);
         }
+
+       
     }
     
 }

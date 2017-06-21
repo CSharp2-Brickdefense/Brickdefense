@@ -4,15 +4,9 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
-<<<<<<< HEAD
-using System;
-using System.Collections.Generic;
-=======
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
->>>>>>> 3d9cfe4dad27d870ca8909c792aab196c656c7d8
 
 namespace Brickdefense
 {
@@ -27,12 +21,11 @@ namespace Brickdefense
         Ball ball;
         Rectangle screen;
 
-        [,] rows;
+        //[,] rows;
 
         int score;
         int highscore;
         List<Ball> balls;
-        Ball ball;
 
         public Game()
         {

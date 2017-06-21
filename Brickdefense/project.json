@@ -1,6 +1,8 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3"
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
+    "MonoGame.Extended.Content.Pipeline": "0.6.568",
+    "MonoGame.Framework.Content.Pipeline.Portable": "3.6.0.1625"
   },
   "frameworks": {
     "uap10.0": {}
