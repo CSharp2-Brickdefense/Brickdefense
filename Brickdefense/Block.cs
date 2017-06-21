@@ -3,70 +3,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Brickdefense
 {
     class Block
     {
-        private int width;
-        private int height;
-        private int xpos;
-        private int ypos;
-        private int value;
 
-        public void collision()
+        Texture2D texture;
+        Rectangle location;
+        Color tint;
+        bool alive;
+
+
+        //locatie van de steen
+        public Rectangle Location
         {
-
+            get { return location; }
         }
 
-        public void setWidht(int value)
+        //eigenschappen van de stenen
+        public Block(Texture2D texture, Rectangle location, Color tint)
         {
-            this.width = value;
+            this.texture = texture;
+            this.location = location;
+            this.tint = tint;
+            this.alive = true;
         }
 
-        public int getWidth()
+        //controle of de steen geraakt is en zo ja dan is de alive staat false
+        public void CheckCollision(Ball ball)
         {
-            return this.width;
+            if (alive && ball.Bounds.Intersects(location))
+            {
+                alive = false;
+                ball.Deflection(this);
+
+            }
         }
 
-        public void setHeight(int value)
+        //tekent de stenen als ze nog in leven zijn
+        public void Draw(SpriteBatch spriteBatch)
         {
-            this.height = value;
-        }
+            if (alive)
+                spriteBatch.Draw(texture, location, tint);
 
-        public int getHeight()
-        {
-            return this.height;
-        }
-
-        public void setXpos(int value)
-        {
-            this.xpos = value;
-        }
-
-        public int getXpos()
-        {
-            return this.xpos;
-        }
-
-        public void setYpos(int value)
-        {
-            this.ypos = value;
-        }
-
-        public int getYpos()
-        {
-            return this.ypos;
-        }
-
-        public void setValue(int value)
-        {
-            this.value = value;
-        }
-
-        public int getValue()
-        {
-            return this.value;
         }
     }
 }
