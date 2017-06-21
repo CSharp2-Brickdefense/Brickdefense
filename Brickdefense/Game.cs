@@ -12,7 +12,8 @@ using System.Collections.Generic;
 
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-
+using Windows.System.Threading;
+using System.Threading;
 
 namespace Brickdefense
 {
@@ -32,13 +33,24 @@ namespace Brickdefense
  
         Texture2D ballimage;
         int ballAmount;
+        int ballsshot;
         
         Rectangle screenRectangle;
+
+        public float fireRate = 0.5F;
+        private float nextFire = 0.0F;
 
         int bricksWide = 10;
         int bricksHigh = 5;
         Texture2D blockimage;
         Block[,] blocks;
+
+
+        int setter = 0;
+
+        private static readonly TimeSpan intervalBetweenAttack = TimeSpan.FromMilliseconds(1000);
+        private TimeSpan lastTimeAttack;
+
 
         public Game()
         {
@@ -51,6 +63,7 @@ namespace Brickdefense
 
 
             screenRectangle = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
+            balls = new List<Ball>();
         }
 
         protected override void Initialize()
@@ -74,28 +87,28 @@ namespace Brickdefense
             ballimage = Content.Load<Texture2D>("ball");
 
             //maakt de stenen
-            blockimage = Content.Load<Texture2D>("brick");
+            blockimage = Content.Load<Texture2D>("block");
 
             ballAmount = 3;
             StartGame();
 
         }
 
+       
+
         private void StartGame()
         {
 
             
-            balls = new List<Ball>();
+            
             for (int i = 0; i < ballAmount; i++)
             {
                 balls.Add(new Ball(ballimage, screenRectangle));
                 balls[i].SetInStartPosition();
+                balls[i].setMotion(1, 1);
             }
 
-            balls[1].setMotion(1, 1);
-            balls[2].setMotion(2, 1);
-            
-
+       
             //arraylist voor het opslaan van de stenen
             blocks = new Block[bricksWide, bricksHigh];
 
@@ -133,7 +146,7 @@ namespace Brickdefense
                             y * blockimage.Height,
                             blockimage.Width,
                             blockimage.Height),
-                        tint);
+                        tint, 1);
                 }
             }
 
@@ -152,15 +165,30 @@ namespace Brickdefense
                 Exit();
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                
+               
+            }
 
             foreach (Ball ball in balls)
             {
-                ball.Update();
-                //controle of een steen is geraakt door de bal
                 foreach (Block brick in blocks)
                 {
                     brick.CheckCollision(ball);
                 }
+                ball.Update();
+
+                if (lastTimeAttack + intervalBetweenAttack < gameTime.TotalGameTime)
+                {
+                    shootBalls();
+                    lastTimeAttack = gameTime.TotalGameTime;
+                }
+
+                
+                
+                //controle of een steen is geraakt door de bal
+                
             }
 
 
@@ -181,7 +209,10 @@ namespace Brickdefense
 
             foreach (Ball ball in balls)
             {
-                ball.Draw(spriteBatch);
+               
+                    ball.Draw(spriteBatch);
+                
+                
                 
             }
 
@@ -223,9 +254,15 @@ namespace Brickdefense
             // todo: create new row of blocks with value and store them
         }
 
+
+       
         protected void shootBalls()
         {
-
+            if (setter < ballAmount)
+            {
+                balls[this.setter].setSpeed(4f);
+                setter++;
+            }
         }
 
        

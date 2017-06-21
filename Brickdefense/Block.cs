@@ -12,9 +12,10 @@ namespace Brickdefense
     {
 
         Texture2D texture;
-        Rectangle location;
+        Rectangle location { get; set; }
         Color tint;
         bool alive;
+        int value;
 
 
         //locatie van de steen
@@ -24,11 +25,12 @@ namespace Brickdefense
         }
 
         //eigenschappen van de stenen
-        public Block(Texture2D texture, Rectangle location, Color tint)
+        public Block(Texture2D texture, Rectangle location, Color tint, int value)
         {
             this.texture = texture;
             this.location = location;
             this.tint = tint;
+            this.value = value;
             this.alive = true;
         }
 
@@ -37,7 +39,18 @@ namespace Brickdefense
         {
             if (alive && ball.Bounds.Intersects(location))
             {
-                alive = false;
+                
+
+
+
+
+                if(value == 0)
+                {
+                    alive = false;
+                }
+
+                value--;
+                
                 ball.Deflection(this);
 
             }
