@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Brickdefense
 {
     class Ball
     {
-    
         Vector2 motion;
         Vector2 position;
         Rectangle bounds;
@@ -112,6 +113,7 @@ namespace Brickdefense
 
         //zorgt ervoor dat de bal maar een keer van richting veranderd bij een aanraking van 2 stenen tegelijk
         public void Deflection(Block brick)
+
         {
             if (!collided)
             {
