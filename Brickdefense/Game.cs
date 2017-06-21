@@ -145,8 +145,8 @@ namespace Brickdefense
                             x * blockimage.Width,
                             y * blockimage.Height,
                             blockimage.Width,
-                            blockimage.Height),
-                        tint, 1);
+                            blockimage.Height)
+                        , 1);
                 }
             }
 

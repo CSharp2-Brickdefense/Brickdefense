@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Drawing;
 
 namespace Brickdefense
 {
@@ -25,11 +26,11 @@ namespace Brickdefense
         }
 
         //eigenschappen van de stenen
-        public Block(Texture2D texture, Rectangle location, Color tint, int value)
+        public Block(Texture2D texture, Rectangle location,  int value)
         {
             this.texture = texture;
             this.location = location;
-            this.tint = tint;
+            this.tint = Color.Gray;
             this.value = value;
             this.alive = true;
         }

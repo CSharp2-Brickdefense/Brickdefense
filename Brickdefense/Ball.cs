@@ -120,8 +120,7 @@ namespace Brickdefense
 
         public void Deflection(Block brick)
         {
-            if (!collided)
-            {
+          
                 if(brick.Location.Left >= bounds.Right){
                     position.X += 10;
                     motion.X *= -1;
@@ -142,11 +141,11 @@ namespace Brickdefense
                     motion.Y *= -1;
                 }
 
+                
 
 
 
-                collided = true;
-            }
+
         }
 
         //tekend de bal
