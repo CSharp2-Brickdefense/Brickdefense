@@ -8,9 +8,7 @@ namespace Brickdefense
 {
     interface Object 
     {
-        int width { get; set; }
-        int height { get; set; }
-        int xpos { get; set; }
+       
 
         void collision();
 

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 
 namespace Brickdefense
 {
@@ -13,12 +15,18 @@ namespace Brickdefense
         Rectangle screen;
         int score;
         int highscore;
-
+        List<Ball> balls;
+        Ball ball;
 
         public Game()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = 750;
+            graphics.PreferredBackBufferHeight = 600;
+
+            screen = new Rectangle(0, 0, graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight);
         }
 
         /// <summary>
@@ -30,7 +38,7 @@ namespace Brickdefense
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+          
             base.Initialize();
         }
 
@@ -42,6 +50,9 @@ namespace Brickdefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            Texture2D tempTexture = Content.Load<Texture2D>("ball.png");
+            ball = new Ball(tempTexture, screen);
 
             // TODO: use this.Content to load your game content here
         }
@@ -74,7 +85,10 @@ namespace Brickdefense
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
+     
 
+            spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
@@ -110,6 +124,7 @@ namespace Brickdefense
 
         }
 
+       
 
     }
 }
