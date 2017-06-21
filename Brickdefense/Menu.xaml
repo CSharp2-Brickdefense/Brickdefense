@@ -1,0 +1,14 @@
+﻿<Page
+    x:Class="Brickdefense.Menu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Brickdefense"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+	<Grid Background="#FF1F1E1E">
+		<Button x:Name="Play" Content="Play" HorizontalAlignment="Left" Margin="133,272,0,0" VerticalAlignment="Top" Height="50" Width="102" Background="#33B4205C" BorderBrush="#33B4205C" FocusVisualPrimaryBrush="#33B4205C" FocusVisualSecondaryBrush="#33B4205C" Foreground="White" Click="Play_Click_1"/>
+		<Button x:Name="Music" Content="Music" HorizontalAlignment="Left" Margin="133,372,0,0" VerticalAlignment="Top" Height="50" Width="102" Background="#333315F0" BorderBrush="#333315F0" FocusVisualPrimaryBrush="#333315F0" FocusVisualSecondaryBrush="#333315F0" Foreground="White" Click="Music_Click"/>
+    </Grid>
+</Page>
