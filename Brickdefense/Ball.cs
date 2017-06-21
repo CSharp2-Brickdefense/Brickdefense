@@ -19,7 +19,7 @@ namespace Brickdefense
         float motionX = 0;
         float motionY = 0;
 
-        const float ballStartSpeed = 8f;
+        const float ballStartSpeed = 0f;
         float ballSpeed;
 
         Texture2D texture;
@@ -51,6 +51,11 @@ namespace Brickdefense
 
             motion = new Vector2(motionX, motionY);
             motion.Normalize();
+        }
+
+        public void setSpeed(float speed)
+        {
+            this.ballSpeed = speed;
         }
 
         //controleert op botsingen 
@@ -112,13 +117,33 @@ namespace Brickdefense
 
         //zorgt ervoor dat de bal maar een keer van richting veranderd bij een aanraking van 2 stenen tegelijk
         public void Deflection(Block brick)
-
         {
-            if (!collided)
-            {
-                motion.Y *= -1;
-                collided = true;
-            }
+          
+                if(brick.Location.Left >= bounds.Right){
+                    position.X += 10;
+                    motion.X *= -1;
+                }
+                if (brick.Location.Right <= bounds.Left)
+                {
+                    position.X -= 10;
+                    motion.X *= -1;
+                }
+                if (brick.Location.Bottom <= bounds.Top)
+                {
+                    position.Y -= 10;
+                    motion.Y *= -1;
+                }
+                if (brick.Location.Top <= bounds.Bottom)
+                {
+                    position.Y += 10;
+                    motion.Y *= -1;
+                }
+
+                
+
+
+
+
         }
 
         //tekend de bal
