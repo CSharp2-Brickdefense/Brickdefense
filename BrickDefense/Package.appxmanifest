@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="621c07cd-32f6-4d3f-8d14-4a7971070f7f"
-    Publisher="CN=Maaike"
+    Name="b69e15d7-386f-47da-86d1-3c959ab10034"
+    Publisher="CN=Falco"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="621c07cd-32f6-4d3f-8d14-4a7971070f7f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="b69e15d7-386f-47da-86d1-3c959ab10034" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>BrickDefense</DisplayName>
-    <PublisherDisplayName>Maaike</PublisherDisplayName>
+    <DisplayName>Brickdefense</DisplayName>
+    <PublisherDisplayName>Falco</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="BrickDefense.App">
+      EntryPoint="Brickdefense.App">
       <uap:VisualElements
-        DisplayName="BrickDefense"
+        DisplayName="Brickdefense"
         Square150x150Logo="Assets\Logo.png"
         Square44x44Logo="Assets\SmallLogo.png"
-        Description="BrickDefense"
+        Description="Brickdefense"
         BackgroundColor="#464646">
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
