@@ -120,28 +120,43 @@ namespace Brickdefense
 
         public void Deflection(Block brick)
         {
-          
-                if(brick.Location.Left >= bounds.Right){
-                    position.X += 10;
-                    motion.X *= -1;
-                }
-                if (brick.Location.Right <= bounds.Left)
-                {
-                    position.X -= 10;
-                    motion.X *= -1;
-                }
-                if (brick.Location.Bottom <= bounds.Top)
-                {
-                    position.Y -= 10;
-                    motion.Y *= -1;
-                }
-                if (brick.Location.Top <= bounds.Bottom)
-                {
-                    position.Y += 10;
-                    motion.Y *= -1;
-                }
+            int ballTop = bounds.Top;
+            int ballLeft = bounds.Left;
+            int ballRight = bounds.Right;
+            int ballBottom = bounds.Bottom;
 
-                
+            int brickLeft = brick.Location.Left;
+            int brickRight = brick.Location.Right;
+            int brickTop = brick.Location.Top;
+            int brickBottom = brick.Location.Bottom;
+
+
+
+          
+
+            // botom of brick 
+            if (ballTop <= brickBottom && ballTop >= brickTop && ballLeft >= brickLeft && ballLeft <= brickRight)
+            {
+                motion.Y *= -1;
+            }
+            // top of brick
+            if (ballBottom >= brickTop && ballTop <= brickBottom && ballLeft >= brickLeft && ballLeft <= brickRight)
+            {
+                motion.Y *= -1;
+            }
+            // left of brick
+            if (ballRight >= brickLeft && ballRight <= brickRight && ballTop >= brickTop && ballTop <= brickBottom)
+            {
+                motion.X *= -1;
+            }
+
+            // right of brick
+            if (ballLeft <= brickRight && ballLeft >= brickRight && ballTop >= brickTop && ballTop <= brickBottom)
+            {
+                motion.X *= -1;
+            }
+
+
 
 
 
